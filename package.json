@@ -9,11 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Repositorio del TP3 final del Sprint 2 - Celia Isabel Bensadón",
   "dependencies": {
     "express": "^4.21.1",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.0"
+    "mongoose": "^8.8.1"
   },
   "devDependencies": {
     "@types/node": "^22.8.6"
