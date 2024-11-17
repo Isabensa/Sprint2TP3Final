@@ -1,15 +1,15 @@
 export function renderizarSuperheroe(superheroe) {
   return {
-      Id: superheroe._id,
-      Nombre: superheroe.nombreSuperHeroe,
-      "Nombre Real": superheroe.nombreReal,
-      Edad: superheroe.edad,
-      "Planeta de Origen": superheroe.planetaOrigen,
-      Debilidad: superheroe.debilidad,
-      Poderes: superheroe.poderes,
-      Aliados: superheroe.aliados,
-      Enemigos: superheroe.enemigos,
-      Creador: superheroe.Creador
+      id: superheroe._id,
+      nombreSuperHeroe: superheroe.nombreSuperHeroe,
+      nombreReal: superheroe.nombreReal,
+      edad: superheroe.edad,
+      planetaOrigen: superheroe.planetaOrigen,
+      debilidad: superheroe.debilidad,
+      poderes: superheroe.poderes,
+      aliados: superheroe.aliados,
+      enemigos: superheroe.enemigos,
+      creador: superheroe.creador
   };
 }
 

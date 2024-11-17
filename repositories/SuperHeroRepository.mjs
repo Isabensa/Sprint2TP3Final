@@ -1,3 +1,4 @@
+// SuperHeroRepository.mjs
 import SuperHero from '../models/SuperHero.mjs';
 import IRepository from './IRepository.mjs';
 
@@ -19,24 +20,33 @@ class SuperHeroRepository extends IRepository {
         return await SuperHero.find({ edad: { $gt: 30 } });
     }
 
-    // Método para guardar un nuevo superhéroe
     async guardar(superheroe) {
         return await superheroe.save();
     }
 
-    // Método para actualizar un superhéroe por ID
     async actualizar(id, datosActualizados) {
         return await SuperHero.findByIdAndUpdate(id, datosActualizados, { new: true });
     }
 
-    // Método para borrar un superhéroe por ID
     async borrarPorId(id) {
         return await SuperHero.findByIdAndDelete(id);
     }
 
-    // Método para borrar un superhéroe por nombre
-    async borrarPorNombre(nombreSuperHeroe) {
-        return await SuperHero.findOneAndDelete({ nombreSuperHeroe });
+
+    /*async borrarPorNombre(nombre) {
+        return await SuperHero.findOneAndDelete({ nombreSuperHeroe: nombre });
+    }*/
+
+
+    async borrarPorNombre(nombre) {
+        console.log(`Repositorio: Intentando borrar superhéroe con nombre: ${nombre}`);
+        const resultado = await SuperHero.findOneAndDelete({ nombreSuperHeroe: nombre });
+        if (resultado) {
+            console.log(`Repositorio: Superhéroe ${nombre} borrado exitosamente`);
+        } else {
+            console.log(`Repositorio: Superhéroe ${nombre} no encontrado`);
+        }
+        return resultado;
     }
 }
 

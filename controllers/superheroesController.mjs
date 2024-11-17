@@ -10,6 +10,7 @@ import {
 } from '../services/superheroesService.mjs';
 
 import { renderizarSuperheroe, renderizarListaSuperheroes } from '../views/responseView.mjs';
+import { validationResult } from 'express-validator'; // Importar express-validator para validaciones
 
 export async function obtenerSuperheroePorIdController(req, res) {
     const { id } = req.params;
@@ -44,7 +45,13 @@ export async function obtenerSuperheroesMayoresDe30Controller(req, res) {
     res.send(renderizarListaSuperheroes(superheroe));
 }
 
+// Función modificada para incluir validaciones
 export async function crearSuperheroeController(req, res) {
+    const errors = validationResult(req); // Verificar si hay errores de validación
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errores: errors.array() }); // Devolver errores si los hay
+    }
+
     const datosSuperheroe = req.body;
     const nuevoSuperheroe = await crearSuperheroe(datosSuperheroe);
     res.status(201).send(renderizarSuperheroe(nuevoSuperheroe));
@@ -73,13 +80,27 @@ export async function borrarSuperheroePorIdController(req, res) {
     }
 }
 
-export async function   borrarSuperheroePorNombreController(req, res) {
-    const { nombreSuperHeroe } = req.params;
-    const superheroeBorrado = await borrarSuperheroePorNombre(nombreSuperHeroe);
+/*export async function borrarSuperheroePorNombreController(req, res) {
+    const { nombre } = req.params;
+    const superheroeBorrado = await borrarSuperheroePorNombre(nombre);
 
     if (superheroeBorrado) {
         res.send(renderizarSuperheroe(superheroeBorrado));
     } else {
+        res.status(404).send({ mensaje: "Superhéroe no encontrado" });
+    }
+*/
+
+export async function borrarSuperheroePorNombreController(req, res) {
+    const { nombre } = req.params;
+    console.log(`Controlador: Solicitando borrar superhéroe con nombre: ${nombre}`);
+    const superheroeBorrado = await borrarSuperheroePorNombre(nombre);
+
+    if (superheroeBorrado) {
+        console.log(`Controlador: Superhéroe con nombre ${nombre} borrado exitosamente`);
+        res.send(renderizarSuperheroe(superheroeBorrado));
+    } else {
+        console.log(`Controlador: No se encontró un superhéroe con el nombre ${nombre}`);
         res.status(404).send({ mensaje: "Superhéroe no encontrado" });
     }
 }

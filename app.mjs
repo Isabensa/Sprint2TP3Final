@@ -28,6 +28,6 @@ app.use(express.json());
 app.use('/api', superHeroRoutes);
 
 // Manejo de errores para rutas no encontradas
-app.use((req, res) => {
+app.use((_req, res) => {
     res.status(404).send({ mensaje: "Ruta no encontrada" });
 });
