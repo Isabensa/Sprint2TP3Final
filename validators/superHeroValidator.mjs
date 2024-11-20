@@ -96,4 +96,3 @@ export const actualizarSuperHeroeValidation = [
 export const eliminarSuperheroeValidation = [
   param('id').isMongoId().withMessage('El ID debe ser un ID de MongoDB válido')
 ];
-

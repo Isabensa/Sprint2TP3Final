@@ -11,10 +11,13 @@
   "license": "ISC",
   "description": "Repositorio del TP3 final del Sprint 2 - Celia Isabel Bensadón",
   "dependencies": {
+    "body-parser": "^1.20.3",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-validator": "^7.2.0",
     "mongodb": "^6.10.0",
-    "mongoose": "^8.8.1"
+    "mongoose": "^8.8.2"
   },
   "devDependencies": {
     "@types/node": "^22.8.6"
