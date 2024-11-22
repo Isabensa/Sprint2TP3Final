@@ -1,4 +1,3 @@
-// SuperHeroRepository.mjs
 import SuperHero from '../models/SuperHero.mjs';
 import IRepository from './IRepository.mjs';
 
@@ -21,6 +20,10 @@ class SuperHeroRepository extends IRepository {
     }
 
     async guardar(superheroe) {
+        // Verificar si el objeto es una instancia del modelo de Mongoose
+        if (!(superheroe instanceof SuperHero)) {
+            superheroe = new SuperHero(superheroe); // Convertir el objeto plano en una instancia del modelo
+        }
         return await superheroe.save();
     }
 
@@ -31,12 +34,6 @@ class SuperHeroRepository extends IRepository {
     async borrarPorId(id) {
         return await SuperHero.findByIdAndDelete(id);
     }
-
-
-    /*async borrarPorNombre(nombre) {
-        return await SuperHero.findOneAndDelete({ nombreSuperHeroe: nombre });
-    }*/
-
 
     async borrarPorNombre(nombre) {
         console.log(`Repositorio: Intentando borrar superhéroe con nombre: ${nombre}`);

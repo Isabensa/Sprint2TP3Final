@@ -46,3 +46,17 @@ export async function borrarSuperheroePorNombre(nombre) {
     }
     return resultado;
 }
+
+export const editarSuperHeroe = async (id, datosActualizados) => {
+    try {
+        // Encuentra y actualiza el superhéroe por ID, devolviendo el nuevo documento
+        const superheroeActualizado = await SuperHero.findByIdAndUpdate(id, datosActualizados, { new: true });
+        if (!superheroeActualizado) {
+            throw new Error('Superhéroe no encontrado');
+        }
+        return superheroeActualizado;
+    } catch (error) {
+        console.error('Error al actualizar el superhéroe:', error.message);
+        throw new Error('Error al actualizar el superhéroe');
+    }
+};

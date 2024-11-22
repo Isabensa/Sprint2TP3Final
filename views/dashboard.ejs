@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Superhéroes</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Opcional para estilos -->
+</head>
+<body>
+    <h1>Dashboard de Superhéroes</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre del Superhéroe</th>
+                <th>Nombre Real</th>
+                <th>Edad</th>
+                <th>Planeta de Origen</th>
+                <th>Poderes</th>
+                <th>Acciones</th> <!-- Columna para acciones -->
+            </tr>
+        </thead>
+        <tbody>
+            <% if (superheroes && superheroes.length > 0) { %>
+                <% superheroes.forEach(superheroe => { %>
+                    <tr>
+                        <td><%= superheroe.nombreSuperHeroe %></td>
+                        <td><%= superheroe.nombreReal %></td>
+                        <td><%= superheroe.edad %></td>
+                        <td><%= superheroe.planetaOrigen %></td>
+                        <td><%= superheroe.poderes %></td>
+                        <td>
+                            <!-- Enlace para editar -->
+                            <a href="/heroes/<%= superheroe._id %>/editar">Editar</a>
+                            <!-- Formulario para eliminar -->
+                            <form action="/heroes/<%= superheroe._id %>/eliminar" method="POST" onsubmit="return confirmarEliminacion()">
+                                <button type="submit" class="btn-eliminar">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="6">No hay superhéroes para mostrar</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+    
+    <!-- Script para confirmar eliminación -->
+    <script>
+        function confirmarEliminacion() {
+            return confirm('¿Estás seguro de que deseas eliminar este superhéroe? Esta acción no se puede deshacer.');
+        }
+    </script>
+</body>
+</html>

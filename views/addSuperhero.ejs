@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Superhéroe</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Agregar un Nuevo Superhéroe</h1>
+    </header>
+    <main>
+        <!-- Formulario para agregar un superhéroe -->
+        <form action="/api/heroes/agregar" method="POST" onsubmit="return validarFormulario()">
+            <!-- Campo para el nombre del superhéroe -->
+            <label for="nombreSuperheroe">Nombre del Superhéroe:</label>
+            <input type="text" id="nombreSuperheroe" name="nombreSuperheroe" required>
+
+            <!-- Campo para el nombre real -->
+            <label for="nombreReal">Nombre Real:</label>
+            <input type="text" id="nombreReal" name="nombreReal" required>
+
+            <!-- Campo para la edad -->
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" min="1" required>
+
+            <!-- Campo para el planeta de origen -->
+            <label for="planetaOrigen">Planeta de Origen:</label>
+            <input type="text" id="planetaOrigen" name="planetaOrigen" required>
+
+            <!-- Campo para la debilidad -->
+            <label for="debilidad">Debilidad:</label>
+            <input type="text" id="debilidad" name="debilidad" required>
+
+            <!-- Botón para enviar -->
+            <button type="submit">Agregar Superhéroe</button>
+        </form>
+    </main>
+    <footer>
+        <p>Gestión de Superhéroes</p>
+    </footer>
+
+    <!-- Validación de formulario con JavaScript -->
+    <script>
+        function validarFormulario() {
+            const edad = document.getElementById('edad').value;
+
+            if (edad <= 0) {
+                alert('La edad debe ser mayor que 0.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>

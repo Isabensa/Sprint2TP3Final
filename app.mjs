@@ -1,9 +1,27 @@
 import express from 'express';
 import { connectDB } from './config/dbConfig.mjs';
 import superHeroRoutes from './routes/superHeroRoutes.mjs';
+import path from 'path'; // Importar path para manejar rutas
+import { fileURLToPath } from 'url'; // Necesario para obtener rutas absolutas en módulos ES
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use('/styles', express.static(path.resolve('src/public/styles')));
+
+// Solución para resolver rutas relativas usando path y ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Configurar directorio de vistas y motor EJS
+app.set('view engine', 'ejs'); // Motor de vistas EJS
+app.set('views', path.join(__dirname, 'views')); // Carpeta de vistas ajustada con ruta absoluta
+
+
+
+// Middleware para servir archivos estáticos (como CSS)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware para parsear JSON
 app.use(express.json());
